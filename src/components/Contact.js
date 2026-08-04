@@ -34,7 +34,7 @@ export function Contact() {
 
             <div class="contact-item">
                 <h4>Location</h4>
-                <p>Maharashtra, India</p>
+                <p>Kaegaon,Maharashtra, India</p>
             </div>
 
             <div class="social-links">
