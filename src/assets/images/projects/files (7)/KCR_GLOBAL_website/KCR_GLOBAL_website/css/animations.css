@@ -1,0 +1,48 @@
+/* ==========================================================================
+   Animations — reveal on scroll, fades, parallax helpers
+   ========================================================================== */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+}
+[data-reveal].in-view { opacity: 1; transform: translateY(0); }
+
+[data-reveal="fade"] { transform: none; }
+[data-reveal="left"] { transform: translateX(-46px); }
+[data-reveal="left"].in-view { transform: translateX(0); }
+[data-reveal="right"] { transform: translateX(46px); }
+[data-reveal="right"].in-view { transform: translateX(0); }
+[data-reveal="scale"] { transform: scale(0.92); }
+[data-reveal="scale"].in-view { transform: scale(1); }
+
+/* stagger children */
+[data-reveal-group] > * { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+[data-reveal-group].in-view > *:nth-child(1) { transition-delay: 0.05s; }
+[data-reveal-group].in-view > *:nth-child(2) { transition-delay: 0.14s; }
+[data-reveal-group].in-view > *:nth-child(3) { transition-delay: 0.23s; }
+[data-reveal-group].in-view > *:nth-child(4) { transition-delay: 0.32s; }
+[data-reveal-group].in-view > *:nth-child(5) { transition-delay: 0.41s; }
+[data-reveal-group].in-view > *:nth-child(6) { transition-delay: 0.50s; }
+[data-reveal-group].in-view > *:nth-child(7) { transition-delay: 0.59s; }
+[data-reveal-group].in-view > *:nth-child(n+8) { transition-delay: 0.65s; }
+[data-reveal-group].in-view > * { opacity: 1; transform: translateY(0); }
+
+/* Text reveal (headline mask) */
+.text-reveal { overflow: hidden; display: inline-block; }
+.text-reveal span { display: inline-block; transform: translateY(110%); transition: transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+.text-reveal.in-view span { transform: translateY(0); }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.fade-in { animation: fadeIn 1s ease forwards; }
+
+@keyframes floatShape { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-18px) rotate(6deg); } }
+.float-shape { animation: floatShape 7s ease-in-out infinite; }
+
+/* Mouse parallax layer */
+.parallax-layer { transition: transform 0.2s ease-out; will-change: transform; }
+
+/* Counter number pop */
+.counting { animation: countPop 0.4s ease; }
+@keyframes countPop { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }

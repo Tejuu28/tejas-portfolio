@@ -1,6 +1,357 @@
-footer{
-    text-align:center;
-    padding:40px;
-    color:#999;
-    border-top:1px solid rgba(255,255,255,.08);
+/* =========================================================
+   FOOTER
+   PREMIUM DEVELOPER PORTFOLIO
+   ========================================================= */
+
+.footer {
+    position: relative;
+
+    padding: 85px 6vw 25px;
+
+    background: #06080d;
+
+    overflow: hidden;
+}
+
+
+.footer::before {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 250px;
+
+    left: 50%;
+    bottom: -180px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background: rgba(79,70,229,0.08);
+
+    filter: blur(100px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.footer-container {
+    position: relative;
+
+    max-width: 1280px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   FOOTER TOP
+   ========================================================= */
+
+.footer-top {
+    display: grid;
+
+    grid-template-columns: 1.5fr 0.7fr 0.7fr;
+
+    gap: 80px;
+}
+
+
+/* =========================================================
+   SMALL LABEL
+   ========================================================= */
+
+.footer-small {
+    display: block;
+
+    margin-bottom: 20px;
+
+    color: rgba(255,255,255,0.22);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.2em;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.footer-brand h2 {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: clamp(48px, 6vw, 78px);
+
+    line-height: 0.85;
+
+    letter-spacing: -0.07em;
+
+    font-weight: 500;
+}
+
+
+.footer-brand h2 span {
+    color: rgba(255,255,255,0.2);
+}
+
+
+.footer-brand p {
+    margin: 25px 0 0;
+
+    color: rgba(255,255,255,0.32);
+
+    font-size: 11px;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   NAVIGATION + CONNECT
+   ========================================================= */
+
+.footer-navigation,
+.footer-connect {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+}
+
+
+.footer-navigation a,
+.footer-connect a {
+    margin-bottom: 11px;
+
+    color: rgba(255,255,255,0.42);
+
+    font-size: 10px;
+
+    text-decoration: none;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.footer-navigation a:hover,
+.footer-connect a:hover {
+    color: #fff;
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.footer-divider {
+    width: 100%;
+
+    height: 1px;
+
+    margin: 70px 0 20px;
+
+    background: rgba(255,255,255,0.08);
+}
+
+
+/* =========================================================
+   BOTTOM
+   ========================================================= */
+
+.footer-bottom {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    align-items: center;
+
+    color: rgba(255,255,255,0.2);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.14em;
+}
+
+
+.footer-bottom span:nth-child(2) {
+    text-align: center;
+}
+
+
+.footer-back-top {
+    justify-self: end;
+
+    color: rgba(255,255,255,0.3);
+
+    text-decoration: none;
+
+    transition: color 0.3s ease;
+}
+
+
+.footer-back-top:hover {
+    color: #fff;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .footer {
+        padding: 70px 5vw 25px;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 55px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-divider {
+        margin-top: 55px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .footer {
+        padding: 65px 20px 25px;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+    }
+
+    .footer-brand {
+        grid-column: auto;
+    }
+
+    .footer-brand h2 {
+        font-size: 55px;
+    }
+
+    .footer-navigation a,
+    .footer-connect a {
+        font-size: 11px;
+    }
+
+    .footer-divider {
+        margin: 45px 0 22px;
+    }
+
+    .footer-bottom {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .footer-bottom span:nth-child(2) {
+        text-align: left;
+    }
+
+    .footer-back-top {
+        justify-self: auto;
+    }
+
+}
+/* =========================================================
+   FOOTER BRAND — MATCH HOME PAGE ACCENT
+   ========================================================= */
+
+.footer-brand h2 {
+    color: #7c8cff;
+}
+
+.footer-brand h2 span {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   KEEP THREE.JS CUBE VISIBLE BEHIND FOOTER
+   ========================================================= */
+
+.footer {
+    position: relative;
+    z-index: 1;
+
+    background: transparent !important;
+}
+
+.footer-container {
+    position: relative;
+    z-index: 5;
+}
+
+.footer::before {
+    z-index: -1;
+}
+/* =========================================================
+   FOOTER — MATCH HOME PAGE BLUE
+   ========================================================= */
+
+.footer-brand h2 {
+    color: #3b82f6;
+    text-shadow: 0 0 30px rgba(59, 130, 246, 0.18);
+}
+
+.footer-brand h2 span {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   THREE.JS CUBE — KEEP VISIBLE
+   ========================================================= */
+
+.footer {
+    position: relative;
+    z-index: 1;
+    background: transparent !important;
+}
+
+.footer-container {
+    position: relative;
+    z-index: 5;
+}
+
+.footer::before {
+    z-index: -1;
 }

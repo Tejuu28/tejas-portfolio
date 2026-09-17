@@ -1,80 +1,299 @@
 import * as THREE from "three";
 
 export function createScene() {
-  // Scene
+  // =========================
+  // SCENE
+  // =========================
   const scene = new THREE.Scene();
 
-  // Camera
+  // =========================
+  // CAMERA
+  // =========================
   const camera = new THREE.PerspectiveCamera(
-    75,
+    50,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
   );
 
-  camera.position.z = 5;
+  camera.position.set(0, 0, 6);
 
-  // Renderer
+  // =========================
+  // RENDERER
+  // =========================
   const renderer = new THREE.WebGLRenderer({
     alpha: true,
     antialias: true,
+    powerPreference: "high-performance"
   });
 
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+  );
 
-  // Canvas style
+  renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio, 2)
+  );
+
   renderer.domElement.style.position = "fixed";
   renderer.domElement.style.top = "0";
   renderer.domElement.style.left = "0";
   renderer.domElement.style.width = "100%";
   renderer.domElement.style.height = "100%";
+
+  // Keep the 3D object behind the website content
   renderer.domElement.style.zIndex = "-1";
+  renderer.domElement.style.pointerEvents = "none";
 
   document.body.appendChild(renderer.domElement);
 
-  // Lights
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+  // =========================
+  // LIGHTING
+  // =========================
+  const ambientLight = new THREE.AmbientLight(
+    0xffffff,
+    1.5
+  );
+
   scene.add(ambientLight);
 
-  const directionalLight = new THREE.DirectionalLight(0x00e5ff, 2);
-  directionalLight.position.set(3, 3, 5);
+  const directionalLight = new THREE.DirectionalLight(
+    0xffffff,
+    2.5
+  );
+
+  directionalLight.position.set(4, 5, 6);
   scene.add(directionalLight);
 
-  // Geometry
-const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+  const blueLight = new THREE.PointLight(
+    0x2563eb,
+    4,
+    12
+  );
 
-// Material
-const material = new THREE.MeshPhysicalMaterial({
-  color: 0x4f46e5,
-  metalness: 0.2,
-  roughness: 0,
-  transmission: 1,
-  transparent: true,
-  opacity: 0.9,
-  thickness: 1,
-});
-// Mesh
-const cube = new THREE.Mesh(geometry, material);
+  blueLight.position.set(4, 2, 4);
+  scene.add(blueLight);
 
-scene.add(cube);
+  const purpleLight = new THREE.PointLight(
+    0x7c3aed,
+    3,
+    10
+  );
 
+  purpleLight.position.set(-3, -2, 3);
+  scene.add(purpleLight);
+
+  // =========================
+  // CUBE GROUP
+  // =========================
+  const cubeGroup = new THREE.Group();
+
+  // =========================
+  // CUBE GEOMETRY
+  // =========================
+  const geometry = new THREE.BoxGeometry(
+    1.6,
+    1.6,
+    1.6
+  );
+
+  // =========================
+  // CUBE MATERIAL
+  // =========================
+  const material = new THREE.MeshPhysicalMaterial({
+    color: 0x4f46e5,
+    metalness: 0.35,
+    roughness: 0.2,
+    clearcoat: 1,
+    clearcoatRoughness: 0.15,
+    transparent: true,
+    opacity: 0.95
+  });
+
+  // =========================
+  // CUBE
+  // =========================
+  const cube = new THREE.Mesh(
+    geometry,
+    material
+  );
+
+  cubeGroup.add(cube);
+
+  // =========================
+  // CUBE EDGES
+  // =========================
+  const edgesGeometry = new THREE.EdgesGeometry(
+    geometry
+  );
+
+  const edgesMaterial = new THREE.LineBasicMaterial({
+    color: 0x9f7aea,
+    transparent: true,
+    opacity: 0.75
+  });
+
+  const edges = new THREE.LineSegments(
+    edgesGeometry,
+    edgesMaterial
+  );
+
+  cubeGroup.add(edges);
+
+  // =========================
+  // CENTER POSITION
+  // =========================
+  cubeGroup.position.set(
+    0,
+    0,
+    -0.5
+  );
+
+  cubeGroup.scale.set(
+    0.7,
+    0.7,
+    0.7
+  );
+
+  cubeGroup.rotation.set(
+    -0.15,
+    0.35,
+    0
+  );
+
+  scene.add(cubeGroup);
+
+  // =========================
+  // MOUSE INTERACTION
+  // =========================
+  const mouse = {
+    x: 0,
+    y: 0
+  };
+
+  const targetRotation = {
+    x: -0.15,
+    y: 0.35
+  };
+
+  window.addEventListener(
+    "mousemove",
+    (event) => {
+      mouse.x =
+        (event.clientX / window.innerWidth) * 2 - 1;
+
+      mouse.y =
+        -(event.clientY / window.innerHeight) * 2 + 1;
+
+      targetRotation.x =
+        -0.15 + mouse.y * 0.12;
+
+      targetRotation.y =
+        0.35 + mouse.x * 0.18;
+    }
+  );
+
+  // =========================
+  // ANIMATION
+  // =========================
   function animate() {
-  requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
 
-  cube.rotation.x += 0.005;
-  cube.rotation.y += 0.008;
+    // Cube rotation
+    cube.rotation.x += 0.003;
+    cube.rotation.y += 0.006;
 
-  renderer.render(scene, camera);
-}
+    // Smooth mouse movement
+    cubeGroup.rotation.x +=
+      (targetRotation.x - cubeGroup.rotation.x) * 0.025;
+
+    cubeGroup.rotation.y +=
+      (targetRotation.y - cubeGroup.rotation.y) * 0.025;
+
+    // Floating effect
+    cubeGroup.position.y =
+      Math.sin(Date.now() * 0.001) * 0.06;
+
+    renderer.render(
+      scene,
+      camera
+    );
+  }
 
   animate();
 
-  // Responsive
-  window.addEventListener("resize", () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
+  // =========================
+  // RESPONSIVE
+  // =========================
+  function handleResize() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    camera.aspect =
+      width / height;
+
     camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
+    renderer.setSize(
+      width,
+      height
+    );
+
+    renderer.setPixelRatio(
+      Math.min(window.devicePixelRatio, 2)
+    );
+
+    // Desktop
+    if (width > 1100) {
+      cubeGroup.position.set(
+        0,
+        0,
+        -0.5
+      );
+
+      cubeGroup.scale.set(
+        0.7,
+        0.7,
+        0.7
+      );
+    }
+
+    // Tablet
+    else if (width > 700) {
+      cubeGroup.position.set(
+        0,
+        0,
+        -0.5
+      );
+
+      cubeGroup.scale.set(
+        0.6,
+        0.6,
+        0.6
+      );
+    }
+
+    // Mobile
+    else {
+      cubeGroup.position.set(
+        0,
+        -0.8,
+        -0.5
+      );
+
+      cubeGroup.scale.set(
+        0.45,
+        0.45,
+        0.45
+      );
+    }
+  }
+
+  window.addEventListener(
+    "resize",
+    handleResize
+  );
+
+  handleResize();
 }

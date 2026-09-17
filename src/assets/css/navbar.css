@@ -1,50 +1,765 @@
-.navbar{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    padding:22px 70px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(255,255,255,.05);
-    backdrop-filter:blur(18px);
-    z-index:1000;
-    border-bottom:1px solid rgba(255,255,255,.08);
+/* =========================================================
+   ULTRA PROFESSIONAL NAVBAR
+   TEJAS MANE PORTFOLIO
+   ========================================================= */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 82px;
+
+    padding: 0 5%;
+
+    display: flex;
+    align-items: center;
+
+    background: rgba(5, 7, 11, 0.55);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+
+    z-index: 1000;
+
+    transition:
+        height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.45s ease,
+        border-color 0.45s ease,
+        box-shadow 0.45s ease;
 }
 
-.logo{
-    font-size:30px;
-    font-weight:bold;
-    color:#00E5FF;
+
+/* =========================================================
+   SCROLLED STATE
+   ========================================================= */
+
+.navbar.scrolled {
+    height: 70px;
+
+    background: rgba(5, 7, 11, 0.86);
+
+    border-bottom-color: rgba(96, 165, 250, 0.12);
+
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.28);
 }
 
-nav{
-    display:flex;
-    gap:35px;
+
+/* =========================================================
+   NAVBAR INNER
+   ========================================================= */
+
+.navbar-inner {
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 40px;
 }
 
-nav a{
-    color:#fff;
-    transition:.3s;
-    position:relative;
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    flex-shrink: 0;
+
+    color: #ffffff;
+
+    text-decoration: none;
 }
 
-nav a:hover{
-    color:#00E5FF;
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo-mark {
+    position: relative;
+
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(96, 165, 250, 0.45);
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(59, 130, 246, 0.18),
+            rgba(255, 255, 255, 0.035)
+        );
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    letter-spacing: -0.04em;
+
+    box-shadow:
+        0 0 30px rgba(59, 130, 246, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    transition:
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
 }
 
-nav a::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-6px;
-    width:0;
-    height:2px;
-    background:#00E5FF;
-    transition:.3s;
+
+.logo-mark::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -1px;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(96, 165, 250, 0.45),
+            transparent 45%
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.4s ease;
+
+    pointer-events: none;
 }
 
-nav a:hover::after{
-    width:100%;
+
+.navbar-brand:hover .logo-mark {
+    transform: translateY(-2px) rotate(-3deg);
+
+    border-color: rgba(96, 165, 250, 0.8);
+
+    box-shadow:
+        0 0 35px rgba(59, 130, 246, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+
+.navbar-brand:hover .logo-mark::before {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   BRAND TEXT
+   ========================================================= */
+
+.brand-text {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1px;
+}
+
+
+.brand-name {
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: 0.13em;
+
+    line-height: 1.2;
+}
+
+
+.brand-role {
+    color: #7f8a9d;
+
+    font-size: 8px;
+    font-weight: 600;
+
+    letter-spacing: 0.22em;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   DESKTOP NAVIGATION
+   ========================================================= */
+
+.nav-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-left: auto;
+}
+
+
+.nav-links .nav-link {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 14px;
+
+    color: #929aaa;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    letter-spacing: 0.04em;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    transition:
+        color 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.nav-links .nav-link:hover {
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.045);
+
+    transform: translateY(-1px);
+}
+
+
+.nav-links .nav-link.active {
+    color: #ffffff;
+
+    background: rgba(59, 130, 246, 0.09);
+}
+
+
+/* =========================================================
+   NAV NUMBER
+   ========================================================= */
+
+.nav-number {
+    color: #52647f;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    transition: color 0.3s ease;
+}
+
+
+.nav-links .nav-link:hover .nav-number,
+.nav-links .nav-link.active .nav-number {
+    color: #60a5fa;
+}
+
+
+/* =========================================================
+   ACTIVE INDICATOR
+   ========================================================= */
+
+.nav-links .nav-link::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 3px;
+
+    width: 0;
+    height: 2px;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #3b82f6,
+            #60a5fa
+        );
+
+    transform: translateX(-50%);
+
+    box-shadow:
+        0 0 12px rgba(59, 130, 246, 0.55);
+
+    transition:
+        width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.nav-links .nav-link:hover::after,
+.nav-links .nav-link.active::after {
+    width: 18px;
+}
+
+
+/* =========================================================
+   CONTACT LINK
+   ========================================================= */
+
+.nav-links .nav-link:last-child {
+    margin-left: 8px;
+
+    padding-inline: 17px;
+
+    border: 1px solid rgba(96, 165, 250, 0.18);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(59, 130, 246, 0.12),
+            rgba(255, 255, 255, 0.025)
+        );
+}
+
+
+.nav-links .nav-link:last-child:hover {
+    border-color: rgba(96, 165, 250, 0.45);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(59, 130, 246, 0.18),
+            rgba(255, 255, 255, 0.045)
+        );
+}
+
+
+/* =========================================================
+   MOBILE MENU BUTTON
+   ========================================================= */
+
+.menu-btn {
+    position: relative;
+
+    width: 46px;
+    height: 46px;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+
+    border-radius: 13px;
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.menu-btn:hover {
+    background:
+        rgba(59, 130, 246, 0.10);
+
+    border-color:
+        rgba(96, 165, 250, 0.35);
+
+    transform: translateY(-2px);
+}
+
+
+.menu-btn span {
+    display: block;
+
+    width: 19px;
+    height: 1.5px;
+
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    transition:
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.25s ease,
+        width 0.3s ease;
+}
+
+
+.menu-btn span:nth-child(2) {
+    width: 13px;
+
+    align-self: flex-end;
+
+    margin-right: 13px;
+}
+
+
+/* =========================================================
+   MOBILE BUTTON OPEN
+   ========================================================= */
+
+.menu-btn.active span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+
+
+.menu-btn.active span:nth-child(2) {
+    opacity: 0;
+
+    width: 0;
+}
+
+
+.menu-btn.active span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+.mobile-menu {
+    position: fixed;
+
+    top: 82px;
+    left: 16px;
+    right: 16px;
+
+    padding: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(10, 14, 22, 0.98),
+            rgba(5, 8, 14, 0.98)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+
+    border-radius: 24px;
+
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(-15px)
+        scale(0.98);
+
+    transform-origin: top center;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease,
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+    z-index: 999;
+}
+
+
+.mobile-menu.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* =========================================================
+   MOBILE NAV LINKS
+   ========================================================= */
+
+.mobile-nav-links {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.mobile-nav-link {
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    min-height: 62px;
+
+    padding: 0 16px;
+
+    color: #8f99a9;
+
+    border: 1px solid transparent;
+
+    border-radius: 15px;
+
+    text-decoration: none;
+
+    transition:
+        color 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.mobile-nav-link > span {
+    min-width: 22px;
+
+    color: #4f5e73;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+}
+
+
+.mobile-nav-link strong {
+    color: inherit;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    letter-spacing: -0.02em;
+}
+
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+    color: #ffffff;
+
+    background:
+        rgba(59, 130, 246, 0.08);
+
+    border-color:
+        rgba(96, 165, 250, 0.12);
+
+    transform: translateX(4px);
+}
+
+
+.mobile-nav-link:hover > span,
+.mobile-nav-link.active > span {
+    color: #60a5fa;
+}
+
+
+/* =========================================================
+   MOBILE FOOTER
+   ========================================================= */
+
+.mobile-menu-footer {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 20px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid rgba(255, 255, 255, 0.07);
+
+    color: #5e6878;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 0.16em;
+}
+
+
+.mobile-menu-footer span:last-child {
+    color: #7f8a9d;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        height: 74px;
+
+        padding: 0 24px;
+    }
+
+    .navbar.scrolled {
+        height: 68px;
+    }
+
+    .nav-links {
+        gap: 2px;
+    }
+
+    .nav-links .nav-link {
+        padding: 9px 9px;
+
+        font-size: 11px;
+    }
+
+    .nav-number {
+        display: none;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        height: 72px;
+
+        padding: 0 18px;
+    }
+
+    .navbar.scrolled {
+        height: 66px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .menu-btn {
+        display: flex;
+    }
+
+    .mobile-menu {
+        top: 82px;
+    }
+
+    .brand-name {
+        font-size: 12px;
+    }
+
+    .brand-role {
+        font-size: 7px;
+    }
+
+    .logo-mark {
+        width: 41px;
+        height: 41px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .navbar {
+        padding: 0 14px;
+    }
+
+    .navbar-inner {
+        gap: 15px;
+    }
+
+    .brand-text {
+        display: none;
+    }
+
+    .logo-mark {
+        width: 42px;
+        height: 42px;
+    }
+
+    .mobile-menu {
+        left: 10px;
+        right: 10px;
+
+        padding: 18px;
+
+        border-radius: 20px;
+    }
+
+    .mobile-nav-link {
+        min-height: 58px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 340px) {
+
+    .navbar {
+        padding: 0 11px;
+    }
+
+    .logo-mark {
+        width: 39px;
+        height: 39px;
+    }
+
+    .menu-btn {
+        width: 42px;
+        height: 42px;
+    }
+
 }

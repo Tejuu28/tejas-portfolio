@@ -1,81 +1,132 @@
 import { Particles } from "./Particles.js";
+
 export function Hero() {
     return `
-<section id="home" class="hero">
-       ${Particles()}
+        <section id="home" class="hero">
 
-    <div class="hero-bg"></div>
+            ${Particles()}
 
-    <div class="hero-content">
+            <div class="hero-bg"></div>
 
-        <span class="hero-badge">
-            🚀 Available for Internship & Full Stack Projects
-        </span>
+            <div class="hero-grid"></div>
 
-        <h3>Hello, I'm</h3>
+            <div class="hero-glow hero-glow-one"></div>
+            <div class="hero-glow hero-glow-two"></div>
 
-        <h1>
-            Tejas <span>Mane</span>
-        </h1>
+            <div class="hero-content">
 
-        <h2 class="typing">
-            Full Stack Developer
-        </h2>
+                <div class="hero-topline">
+                    <span class="hero-topline-line"></span>
+                    <span>FULL STACK DEVELOPER</span>
+                    <span class="hero-topline-line"></span>
+                </div>
 
-        <p>
-            I am Tejas Mane, an MCA graduate and passionate Full Stack Developer with expertise in designing and developing modern, scalable web applications. My core skills include ASP.NET Core MVC, C#, JavaScript, Python, Java, SQL and PostgreSQL.
 
-I enjoy building secure backend systems, responsive user interfaces and database-driven applications that solve real-world problems. My projects, including a Hospital Management System and Student Management System, have strengthened my experience in full-stack development, database design and software architecture.
+                <span class="hero-badge">
+                    <span class="status-dot"></span>
+                    Available for Internship & Full Stack Projects
+                </span>
 
-I am continuously learning new technologies and best practices to create high-quality software while improving my problem-solving and development skills.
-        </p>
 
-        <div class="hero-buttons">
+                <div class="hero-intro">
+                    <span>Hello, I'm</span>
+                </div>
 
-            <a href="/resume.pdf" class="btn-primary" download>
-                Download Resume
-            </a>
 
-            <a href="#projects" class="btn-secondary">
-                View Projects
-            </a>
+                <h1 class="hero-title">
+                    Tejas
+                    <span>Mane</span>
+                </h1>
 
-       <div class="hero-stats">
 
-     <div class="stat-card">
-        💻
-        <h2>5+</h2>
-        <p>Projects</p>
-    </div>
+                <h2 class="typing">
+                    Full Stack Developer
+                </h2>
 
-    <div>
-        💻
-        <h2>10+</h2>
-        <p>Technologies</p>
-    </div>
 
-    <div>
-        🏆
-        <h2>4+</h2>
-        <p>Certificates</p>
-    </div>
+                <p class="hero-description">
+                    I am Tejas Mane, an MCA graduate and passionate Full Stack Developer with expertise in designing and developing modern, scalable web applications. My core skills include ASP.NET Core MVC, C#, JavaScript, Python, Java, SQL and PostgreSQL.
+                </p>
 
-    <div>
-         💼
-        <h2>1+</h2>
-        <p>Internship</p>
-    </div>
+                <p class="hero-description hero-description-secondary">
+                    I enjoy building secure backend systems, responsive user interfaces and database-driven applications that solve real-world problems. My projects, including a Hospital Management System and Student Management System, have strengthened my experience in full-stack development, database design and software architecture.
+                </p>
 
-    </div>
+                <p class="hero-description hero-description-secondary">
+                    I am continuously learning new technologies and best practices to create high-quality software while improving my problem-solving and development skills.
+                </p>
 
-      <div>
-    
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="/resume.pdf"
+                        class="btn-primary hero-btn"
+                        download
+                    >
+                        <span>Download Resume</span>
+                        <span class="btn-arrow">↗</span>
+                    </a>
+
+                    <a
+                        href="#projects"
+                        class="btn-secondary hero-btn"
+                    >
+                        <span>View Projects</span>
+                        <span class="btn-arrow">↓</span>
+                    </a>
+
+                </div>
+
+
+                <div class="hero-stats">
+
+                    <div class="stat-card">
+                        <div class="stat-icon">⌘</div>
+                        <div class="stat-number">5<span>+</span></div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon">◈</div>
+                        <div class="stat-number">10<span>+</span></div>
+                        <div class="stat-label">Technologies</div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon">✦</div>
+                        <div class="stat-number">4<span>+</span></div>
+                        <div class="stat-label">Certificates</div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <div class="stat-icon">◉</div>
+                        <div class="stat-number">1<span>+</span></div>
+                        <div class="stat-label">Internship</div>
+                    </div>
+
+                </div>
+
+
+                <div class="hero-scroll">
+
+                    <span class="hero-scroll-line"></span>
+
+                    <span class="hero-scroll-text">
+                        SCROLL TO EXPLORE
+                    </span>
+
+                    <span class="hero-scroll-arrow">
+                        ↓
+                    </span>
+
+                </div>
+
             </div>
 
-        </div>
-
-    </div>
-
-</section>
-`;
+        </section>
+    `;
 }
