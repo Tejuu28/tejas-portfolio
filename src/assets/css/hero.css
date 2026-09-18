@@ -953,3 +953,79 @@
         padding-right: 0.05em !important;
     }
 }
+/* =========================================================
+   HERO CINEMATIC MOTION
+   Existing Hero Design Preserved
+   ========================================================= */
+
+.hero {
+    --hero-mouse-x: 0px;
+    --hero-mouse-y: 0px;
+    --hero-scroll: 0px;
+}
+
+.hero-content {
+    transform:
+        translate3d(
+            var(--hero-mouse-x),
+            calc(var(--hero-mouse-y) + var(--hero-scroll)),
+            0
+        );
+    transition: transform 0.15s ease-out;
+    will-change: transform;
+}
+
+.hero-glow-one {
+    transform:
+        translate3d(
+            calc(var(--hero-mouse-x) * -1.5),
+            calc(var(--hero-mouse-y) * -1.5),
+            0
+        );
+    transition: transform 0.3s ease-out;
+}
+
+.hero-glow-two {
+    transform:
+        translate3d(
+            calc(var(--hero-mouse-x) * 1.2),
+            calc(var(--hero-mouse-y) * 1.2),
+            0
+        );
+    transition: transform 0.3s ease-out;
+}
+
+
+/* Mobile — lighter motion */
+
+@media (max-width: 768px) {
+
+    .hero-content {
+        transform:
+            translate3d(
+                0,
+                var(--hero-scroll),
+                0
+            );
+    }
+
+    .hero-glow-one,
+    .hero-glow-two {
+        transform: none;
+    }
+
+}
+
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-content,
+    .hero-glow-one,
+    .hero-glow-two {
+        transform: none !important;
+        transition: none !important;
+    }
+
+}

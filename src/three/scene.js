@@ -1,14 +1,26 @@
 import * as THREE from "three";
 
+let cinematicScrollProgress = 0;
+
+export function setCinematicScroll(progress) {
+  cinematicScrollProgress = Math.max(
+    0,
+    Math.min(1, progress)
+  );
+}
+
 export function createScene() {
+
   // =========================
   // SCENE
   // =========================
+
   const scene = new THREE.Scene();
 
   // =========================
   // CAMERA
   // =========================
+
   const camera = new THREE.PerspectiveCamera(
     50,
     window.innerWidth / window.innerHeight,
@@ -21,6 +33,7 @@ export function createScene() {
   // =========================
   // RENDERER
   // =========================
+
   const renderer = new THREE.WebGLRenderer({
     alpha: true,
     antialias: true,
@@ -51,6 +64,7 @@ export function createScene() {
   // =========================
   // LIGHTING
   // =========================
+
   const ambientLight = new THREE.AmbientLight(
     0xffffff,
     1.5
@@ -58,12 +72,14 @@ export function createScene() {
 
   scene.add(ambientLight);
 
-  const directionalLight = new THREE.DirectionalLight(
-    0xffffff,
-    2.5
-  );
+  const directionalLight =
+    new THREE.DirectionalLight(
+      0xffffff,
+      2.5
+    );
 
   directionalLight.position.set(4, 5, 6);
+
   scene.add(directionalLight);
 
   const blueLight = new THREE.PointLight(
@@ -73,6 +89,7 @@ export function createScene() {
   );
 
   blueLight.position.set(4, 2, 4);
+
   scene.add(blueLight);
 
   const purpleLight = new THREE.PointLight(
@@ -82,16 +99,19 @@ export function createScene() {
   );
 
   purpleLight.position.set(-3, -2, 3);
+
   scene.add(purpleLight);
 
   // =========================
   // CUBE GROUP
   // =========================
+
   const cubeGroup = new THREE.Group();
 
   // =========================
   // CUBE GEOMETRY
   // =========================
+
   const geometry = new THREE.BoxGeometry(
     1.6,
     1.6,
@@ -101,19 +121,22 @@ export function createScene() {
   // =========================
   // CUBE MATERIAL
   // =========================
-  const material = new THREE.MeshPhysicalMaterial({
-    color: 0x4f46e5,
-    metalness: 0.35,
-    roughness: 0.2,
-    clearcoat: 1,
-    clearcoatRoughness: 0.15,
-    transparent: true,
-    opacity: 0.95
-  });
+
+  const material =
+    new THREE.MeshPhysicalMaterial({
+      color: 0x4f46e5,
+      metalness: 0.35,
+      roughness: 0.2,
+      clearcoat: 1,
+      clearcoatRoughness: 0.15,
+      transparent: true,
+      opacity: 0.95
+    });
 
   // =========================
   // CUBE
   // =========================
+
   const cube = new THREE.Mesh(
     geometry,
     material
@@ -124,15 +147,16 @@ export function createScene() {
   // =========================
   // CUBE EDGES
   // =========================
-  const edgesGeometry = new THREE.EdgesGeometry(
-    geometry
-  );
 
-  const edgesMaterial = new THREE.LineBasicMaterial({
-    color: 0x9f7aea,
-    transparent: true,
-    opacity: 0.75
-  });
+  const edgesGeometry =
+    new THREE.EdgesGeometry(geometry);
+
+  const edgesMaterial =
+    new THREE.LineBasicMaterial({
+      color: 0x9f7aea,
+      transparent: true,
+      opacity: 0.75
+    });
 
   const edges = new THREE.LineSegments(
     edgesGeometry,
@@ -144,6 +168,7 @@ export function createScene() {
   // =========================
   // CENTER POSITION
   // =========================
+
   cubeGroup.position.set(
     0,
     0,
@@ -167,6 +192,7 @@ export function createScene() {
   // =========================
   // MOUSE INTERACTION
   // =========================
+
   const mouse = {
     x: 0,
     y: 0
@@ -180,11 +206,16 @@ export function createScene() {
   window.addEventListener(
     "mousemove",
     (event) => {
+
       mouse.x =
-        (event.clientX / window.innerWidth) * 2 - 1;
+        (event.clientX /
+          window.innerWidth) *
+        2 - 1;
 
       mouse.y =
-        -(event.clientY / window.innerHeight) * 2 + 1;
+        -(event.clientY /
+          window.innerHeight) *
+        2 + 1;
 
       targetRotation.x =
         -0.15 + mouse.y * 0.12;
@@ -197,7 +228,9 @@ export function createScene() {
   // =========================
   // ANIMATION
   // =========================
+
   function animate() {
+
     requestAnimationFrame(animate);
 
     // Cube rotation
@@ -206,14 +239,37 @@ export function createScene() {
 
     // Smooth mouse movement
     cubeGroup.rotation.x +=
-      (targetRotation.x - cubeGroup.rotation.x) * 0.025;
+      (targetRotation.x -
+        cubeGroup.rotation.x) *
+      0.025;
 
     cubeGroup.rotation.y +=
-      (targetRotation.y - cubeGroup.rotation.y) * 0.025;
+      (targetRotation.y -
+        cubeGroup.rotation.y) *
+      0.025;
 
     // Floating effect
-    cubeGroup.position.y =
+    const floatingY =
       Math.sin(Date.now() * 0.001) * 0.06;
+
+    // =========================
+    // CINEMATIC SCROLL MOTION
+    // =========================
+
+    const scrollRotation =
+      cinematicScrollProgress * 0.35;
+
+    cubeGroup.rotation.z =
+      scrollRotation;
+
+    cubeGroup.position.y =
+      floatingY +
+      cinematicScrollProgress * 0.25;
+
+    // Subtle depth movement
+    cubeGroup.position.z =
+      -0.5 +
+      cinematicScrollProgress * 0.15;
 
     renderer.render(
       scene,
@@ -226,9 +282,14 @@ export function createScene() {
   // =========================
   // RESPONSIVE
   // =========================
+
   function handleResize() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+
+    const width =
+      window.innerWidth;
+
+    const height =
+      window.innerHeight;
 
     camera.aspect =
       width / height;
@@ -246,6 +307,7 @@ export function createScene() {
 
     // Desktop
     if (width > 1100) {
+
       cubeGroup.position.set(
         0,
         0,
@@ -257,10 +319,12 @@ export function createScene() {
         0.7,
         0.7
       );
+
     }
 
     // Tablet
     else if (width > 700) {
+
       cubeGroup.position.set(
         0,
         0,
@@ -272,10 +336,12 @@ export function createScene() {
         0.6,
         0.6
       );
+
     }
 
     // Mobile
     else {
+
       cubeGroup.position.set(
         0,
         -0.8,
@@ -287,6 +353,7 @@ export function createScene() {
         0.45,
         0.45
       );
+
     }
   }
 

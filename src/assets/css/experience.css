@@ -810,3 +810,59 @@
     }
 
 }
+/* =========================================================
+   EXPERIENCE CINEMATIC REVEAL
+   Existing Design Preserved
+   ========================================================= */
+
+.experience .experience-timeline {
+    opacity: 0;
+    transform: translateY(35px);
+    transition:
+        opacity 0.9s ease,
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.experience.experience-visible .experience-timeline {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.experience .experience-end {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+        opacity 0.8s ease 0.35s,
+        transform 0.8s ease 0.35s;
+}
+
+.experience.experience-visible .experience-end {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .experience .experience-timeline {
+        transform: translateY(22px);
+        transition-duration: 0.7s;
+    }
+
+}
+
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .experience .experience-timeline,
+    .experience .experience-end {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+}

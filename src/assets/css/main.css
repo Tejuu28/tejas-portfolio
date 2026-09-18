@@ -11,9 +11,11 @@
 @import "./certificates.css";
 @import "./navbar.css";
 @import "./hero.css";
+@import "./command-palette.css";
 @import "./about.css";
 @import "./skills.css";
 @import "./projects.css";
+@import "./project-case-study.css";
 @import "./contact.css";
 @import "./footer.css";
 @import "./particles.css";
@@ -621,4 +623,100 @@ main {
 footer {
   position: relative;
   z-index: 2;
+}
+/* =========================================================
+   CINEMATIC SCROLL SYSTEM
+   Existing design preserved
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* Cinematic section base */
+
+main > section {
+    position: relative;
+    isolation: isolate;
+}
+
+/* Scroll reveal */
+
+.cinematic-reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition:
+        opacity 0.9s ease,
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cinematic-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Cinematic active section */
+
+.cinematic-active {
+    --cinematic-progress: 1;
+}
+
+/* Subtle section glow */
+
+.cinematic-active::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.16;
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(59, 130, 246, 0.12),
+            transparent 45%
+        );
+}
+
+/* Scroll depth */
+
+.cinematic-depth {
+    will-change: transform;
+}
+
+/* Prevent animation problems on mobile */
+
+@media (max-width: 768px) {
+
+    .cinematic-reveal {
+        transform: translateY(20px);
+        transition-duration: 0.7s;
+    }
+
+    .cinematic-active::after {
+        opacity: 0.08;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .cinematic-reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .cinematic-active::after {
+        display: none;
+    }
+
 }

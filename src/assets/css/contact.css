@@ -951,3 +951,72 @@
     position: relative;
     z-index: 5;
 }
+/* =========================================================
+   CONTACT CINEMATIC REVEAL
+   Existing Design Preserved
+   ========================================================= */
+
+.contact .contact-hero,
+.contact .contact-left,
+.contact .contact-form-card,
+.contact .contact-bottom {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 0.85s ease,
+        transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact.contact-visible .contact-hero {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact.contact-visible .contact-left {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.12s;
+}
+
+.contact.contact-visible .contact-form-card {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.22s;
+}
+
+.contact.contact-visible .contact-bottom {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.35s;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .contact .contact-hero,
+    .contact .contact-left,
+    .contact .contact-form-card,
+    .contact .contact-bottom {
+        transform: translateY(20px);
+        transition-duration: 0.7s;
+    }
+
+}
+
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .contact .contact-hero,
+    .contact .contact-left,
+    .contact .contact-form-card,
+    .contact .contact-bottom {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+}
